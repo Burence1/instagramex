@@ -40,7 +40,16 @@ class Image(models.Model):
   def update_caption(self,updated_caption):
     self.caption= updated_caption
     self.save()
-    
+
+  def likes_num(self):
+    self.likes.count()
+
+  @classmethod
+  def profile_images(cls,profile):
+    return cls.objects.filter(profile=profile)
+
+  class Meta:
+    ordering=['-pub_date']
 
 class Comments(models.Model):
   comment=models.TextField()
