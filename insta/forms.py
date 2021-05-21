@@ -11,3 +11,8 @@ class UnfollowForm(ModelForm):
   class Meta:
     model = Follow
     exclude = ['followed','follower']
+
+class CreateProfileForm(ModelForm):
+  class Meta:
+    model = Profile
+    exclude = ['followers','following']

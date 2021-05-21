@@ -4,7 +4,7 @@ from django.shortcuts import render,redirect
 from django.http import HttpResponseRedirect,Http404
 from .models import Profile,Follow,Image,Comments
 from django.contrib.auth.models import User
-from .forms import UnfollowForm,FollowForm
+from .forms import UnfollowForm,FollowForm,CreateProfileForm
 
 # Create your views here.
 def index(request):
@@ -204,3 +204,16 @@ def comment(request,image_id):
   comment.save_comment()
 
   return redirect('home')
+
+def create_profile(request):
+  current_user=request.user
+  if request.method == 'POST':
+    form = CreateProfileForm(request.POST,request.FILES)
+    if form.is_valid():
+      profile = form.save(commit=False)
+      profile.user = current_user
+      profile.save()
+    return HttpResponseRedirect('/')
+  else:
+    form = CreateProfileForm()
+    return render(request,'create-profile.html',{"form":form})
