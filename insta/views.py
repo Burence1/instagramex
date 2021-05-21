@@ -85,4 +85,24 @@ def search(request):
           prof_follower.followers=followers_stats
           prof_follower.save()
           
-          return HttpResponseRedirect()
+        return HttpResponseRedirect()
+
+      elif 'unfollow' in request.POST:
+        form = UnfollowForm(request.POST)
+        if form.is_valid():
+          new_unfollow=form.save(commit=False)
+          new_unfollow.followed = prof_followed
+          new_unfollow.follower = prof_follower
+          new_unfollow.delete()
+
+          user_following=Follow.objects.filter(followed=prof_followed)
+          following_stats=len(user_following)
+          prof_followed.following=following_stats
+          prof_followed.save()
+
+          user_followers=Follow.objects.filter(follower=prof_follower)
+          followers_stats=len(user_followers)
+          prof_follower.followers=followers_stats
+          prof_follower.save()
+
+        return HttpResponseRedirect()
