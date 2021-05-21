@@ -6,7 +6,6 @@ from django.contrib.auth.models import User
 
 # Create your views here.
 def index(request):
-  title="Instagramex"
   current_user=request.user
   try:
     profile= Profile.objects.get(user=current_user)
@@ -24,3 +23,19 @@ def index(request):
     followed_images=Image.profile_images(followed_profiles)
     for images in followed_images:
       index_timeline.append(images.id)
+
+    timeline_images=Image.objects.filter(pk__in=index_timeline).order_by('-pub_date')
+    like_image=False
+    for image in timeline_images:
+      images=Image.objects.get(pk=image.id)
+      like_image=False
+      if image.likes.filter(pk__in=index_timeline).order('-pub_date'):
+        like_image= True
+
+    image_comments=Comments.objects.all()[:4]
+    total_comments=Comments.objects.all()
+    count=(len(total_comments))
+    follow_suggestions=Profile.objects.all()[:6]
+    title = "Instagramex"
+
+    return render(request,'index.html',{"title":title,"profile":profile,"timeline_images":timeline_images,"image_comments":image_comments,"follow_suggestions":follow_suggestions,"like_image":like_image,"count":count})
