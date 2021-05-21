@@ -1,0 +1,13 @@
+from django.db import models
+from .models import Image,Follow,Profile,Comments
+from django.forms import  ModelForm
+
+class FollowForm(ModelForm):
+  class Meta:
+    model = Follow
+    exclude = ['followed','follower']
+
+class UnfollowForm(ModelForm):
+  class Meta:
+    model = Follow
+    exclude = ['followed','follower']
