@@ -20,4 +20,7 @@ def index(request):
 
   followers_posts=Follow.objects.filter(follower=profile)
   for follower in followers_posts:
-    
+    followed_profiles=follower.followed
+    followed_images=Image.profile_images(followed_profiles)
+    for images in followed_images:
+      index_timeline.append(images.id)
