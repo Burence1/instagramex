@@ -194,3 +194,13 @@ def profile(request,profile_id):
   if is_following:
     return render(request,'profile/profile.html',{"profile":profile,"post":post,"images":images,"unfollow_form":unfollow_form})
   return render(request,'profile/profile.html',{"profile":profile,"images":images,"post":post,"follow_form":follow_form,})
+
+
+def comment(request,image_id):
+  image=Image.objects.get(pk_in=image_id)
+  comments=Comments.objects.GET.get("comments")
+  current_user=request.user
+  comment=Comments(image=image,comment=comments,user=current_user)
+  comment.save_comment()
+
+  return redirect('home')
