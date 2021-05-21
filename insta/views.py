@@ -120,3 +120,7 @@ def search(request):
     if is_following:
       return render(request,'profile/profile.html',{"profile":profile,"post":post,"images":images,"unfollow_form":unfollow_form})
     return render(request,'profile/profile.html',{"profile":profile,"images":images,"post":post,"follow_form":follow_form,})
+
+  else:
+    not_searched="No user searched"
+    return render(request,'profile/profile.html',{"not_searched":not_searched})
