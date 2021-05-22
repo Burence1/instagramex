@@ -51,8 +51,7 @@ def search(request):
     searched_profile=request.GET.get("user")
     try:
       user=Profile.search_profile(searched_profile).first()
-      user_id=user
-
+      user_id=user.id
     except User.DoesNotExist:
       raise Http404()
     current_user=request.user
@@ -60,7 +59,6 @@ def search(request):
       profile=Profile.objects.get(id=user_id)
     except Profile.DoesNotExist:
       raise Http404()
-
     try:
       prof_follower=Profile.objects.get(user=current_user)
     except Profile.DoesNotExist:
@@ -88,7 +86,7 @@ def search(request):
           prof_follower.followers=followers_stats
           prof_follower.save()
           
-        return HttpResponseRedirect()
+        return HttpResponseRedirect(reverse('UserProfile'))
 
       elif 'unfollow' in request.POST:
         form = UnfollowForm(request.POST)
@@ -108,7 +106,7 @@ def search(request):
           prof_follower.followers=followers_stats
           prof_follower.save()
 
-        return HttpResponseRedirect()
+        return HttpResponseRedirect(reverse('UserProfile'))
 
     else:
       follow_form=FollowForm()
@@ -136,7 +134,6 @@ def profile(request,profile_id):
     profile=Profile.objects.get(id=profile_id)
   except Profile.DoesNotExist:
     raise Http404()
-
   try:
     prof_follower=Profile.objects.get(user=current_user)
   except Profile.DoesNotExist:
@@ -164,7 +161,7 @@ def profile(request,profile_id):
         prof_follower.followers=followers_stats
         prof_follower.save()
         
-      return HttpResponseRedirect()
+      return HttpResponseRedirect(reverse('UserProfile'))
 
     elif 'unfollow' in request.POST:
       form = UnfollowForm(request.POST)
@@ -184,7 +181,7 @@ def profile(request,profile_id):
         prof_follower.followers=followers_stats
         prof_follower.save()
 
-      return HttpResponseRedirect()
+      return HttpResponseRedirect(reverse('UserProfile'))
 
   else:
     follow_form=FollowForm()

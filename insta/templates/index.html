@@ -11,7 +11,8 @@
       <div class="card-header d-flex">
         <div class="profile-image">
           <a href="/profile/{{image.profile.id}}">
-            <img class="rounded-circle" style="width: 3em;height: 3em;" src="{{image.profile.profile_image.url}}" alt="user">
+            <img class="rounded-circle" style="width: 3em;height: 3em;" src="{{image.profile.profile_image.url}}"
+              alt="user">
           </a>
         </div>
         <div class="profile">
@@ -68,15 +69,16 @@
   <div class="col-xs-12 col-md-3">
     <div class="card">
       <div class="card-header" style="font-size: 1.2rem;">
-        Suggestions for you
+        <h3><strong>Follow Suggestions</strong></h3>
       </div>
       <ul class="list-group list-group-flush">
         {% for prof in follow_suggestions %}
         {% if prof == profile%}
-        {% else %}
+        {% elif prof != profile %}
         <li class="list-group-item d-flex">
           <div class="profile-image">
-            <a href="/profile/{{prof.id}}"><img src="{{prof.profile_image.url}}" alt="avatar" class="rounded-circle" style="height: 3em;width: 3em;"></a>
+            <a href="/profile/{{prof.id}}"><img src="{{prof.profile_image.url}}" alt="avatar" class="rounded-circle"
+                style="height: 3em;width: 3em;"></a>
           </div>
           <div class="profile">
             <a href="/profile/{{prof.id}}" class="profile_tag">{{prof.user.username}}</a>
@@ -86,7 +88,7 @@
         {% endfor %}
       </ul>
     </div>
-    </div>
-    <div class="col-xs-12 col-md-1"></div>
-    </div>
-    {% endblock %}
+  </div>
+  <div class="col-xs-12 col-md-1"></div>
+</div>
+{% endblock %}

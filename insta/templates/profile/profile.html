@@ -1,0 +1,24 @@
+{%extends 'base.html'%}
+{% load bootstrap4 %}
+{% load static %}
+{% block content %}
+<div class="row">
+  <div class="col-md-3"></div>
+  {% if search %}
+  {% if profile %}
+  <div class="col-md-3">
+    <img class="rounded-circle" style="width: 3em;height: 3em;" src="{{profile.profile_image.url}}" alt="user">
+  </div>
+  <div class="col-md-3">
+  <div class="row">
+    <div class="col-md-12">
+      <h3>{{profile.user.username}}</h3>
+    </div>
+  </div>  
+  </div>
+  {% endif %}
+  {% else %}
+  {% endif %}
+  <div class="col-md-3"></div>
+</div>
+{% endblock %}
