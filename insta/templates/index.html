@@ -9,9 +9,9 @@
     {% for image in timeline_images %}
     <div class="card" style="margin-bottom: 5rem;">
       <div class="card-header d-flex">
-        <div class="profile-pic">
+        <div class="profile-image">
           <a href="/profile/{{image.profile.id}}">
-            <img class="picture" src="{{image.profile.profile_pic.url}}" alt="user">
+            <img class="rounded-circle" style="width: 3em;height: 3em;" src="{{image.profile.profile_image.url}}" alt="user">
           </a>
         </div>
         <div class="profile">
@@ -71,12 +71,12 @@
         Suggestions for you
       </div>
       <ul class="list-group list-group-flush">
-        {% for prof in suggestions %}
-        {% if prof == loggedIn%}
+        {% for prof in follow_suggestions %}
+        {% if prof == profile%}
         {% else %}
         <li class="list-group-item d-flex">
-          <div class="profile-pic">
-            <a href="/profile/{{prof.id}}"><img src="{{prof.profile_pic.url}}" alt="avatar" class="picture"></a>
+          <div class="profile-image">
+            <a href="/profile/{{prof.id}}"><img src="{{prof.profile_image.url}}" alt="avatar" class="rounded-circle" style="height: 3em;width: 3em;"></a>
           </div>
           <div class="profile">
             <a href="/profile/{{prof.id}}" class="profile_tag">{{prof.user.username}}</a>

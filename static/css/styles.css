@@ -120,3 +120,9 @@ body {
 }
 
 /* end header */
+
+.profile_image{
+  border-radius: 50%;
+  height: 3em;
+  width: 3em;
+}
