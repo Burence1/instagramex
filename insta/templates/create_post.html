@@ -1,0 +1,16 @@
+{%extends 'base.html'%}
+{% load bootstrap4 %}
+{% load static %}
+{% block content %}
+<div>
+  <div class="register">
+    <div class="form-data">
+      <form action="{%url 'NewPost' %}" method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+      {% bootstrap_form form%}
+      <button class="form-btn" type="submit">Upload post</button>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}

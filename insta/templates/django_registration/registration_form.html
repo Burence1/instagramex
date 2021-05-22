@@ -1,0 +1,21 @@
+{%extends "registration/base.html"%}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div id="wrapper" id="content" style="padding-top: 0 !important;">
+  <div class="register">
+    <div class="form-data form-data-reg">
+      <form action="/accounts/register/" method="post">
+        {% csrf_token %}
+        <h4 class="intro">Sign up to see photos and videos from your friends.</h4>
+        {{ form|crispy }}
+        <button class="form-btn" type="submit">Sign Up</button>
+        <input type="hidden" name="next" value="{%url 'CreateProfile' %}">
+      </form>
+      <div class="sign-up">
+        Have an account? <a href="/accounts/login/" class="ml-2">Login</a>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

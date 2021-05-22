@@ -1,12 +1,15 @@
 from django import forms
-from django.http.response import Http404
+#from django.http.response import Http404
 from django.shortcuts import render,redirect
 from django.http import HttpResponseRedirect,Http404
 from .models import Profile,Follow,Image,Comments
 from django.contrib.auth.models import User
 from .forms import UnfollowForm,FollowForm,CreateProfileForm,UpdateProfile,CreatePost
+from django.contrib.auth.decorators import login_required
+from django.urls import reverse
 
 # Create your views here.
+@login_required
 def index(request):
   current_user=request.user
   try:
@@ -15,7 +18,7 @@ def index(request):
     raise Http404()
 
   index_timeline=[]
-  images = Image.profile_images(profile=profile)
+  images = Image.objects.filter(profile=profile)
   for image in images:
     index_timeline.append(image.id)
 
@@ -26,21 +29,21 @@ def index(request):
     for images in followed_images:
       index_timeline.append(images.id)
 
-    timeline_images=Image.objects.filter(pk__in=index_timeline).order_by('-pub_date')
+  timeline_images=Image.objects.filter(pk__in=index_timeline).order_by('-pub_date')
+  like_image=False
+  for image in timeline_images:
+    images=Image.objects.get(pk=image.id)
     like_image=False
-    for image in timeline_images:
-      images=Image.objects.get(pk=image.id)
-      like_image=False
-      if image.likes.filter(pk__in=index_timeline).order('-pub_date'):
-        like_image= True
+    if image.likes.filter(pk__in=index_timeline).order('-pub_date'):
+      like_image= True
 
-    image_comments=Comments.objects.all()[:4]
-    total_comments=Comments.objects.all()
-    count=len(total_comments)
-    follow_suggestions=Profile.objects.all()[:6]
-    title = "Instagramex"
+  image_comments=Comments.objects.all()[:4]
+  total_comments=Comments.objects.all()
+  count=len(total_comments)
+  follow_suggestions=Profile.objects.all()[:6]
+  title = "Instagramex"
 
-    return render(request,'index.html',{"title":title,"profile":profile,"timeline_images":timeline_images,"image_comments":image_comments,"follow_suggestions":follow_suggestions,"like_image":like_image,"count":count})
+  return render(request,'index.html',{"title":title,"profile":profile,"timeline_images":timeline_images,"image_comments":image_comments,"follow_suggestions":follow_suggestions,"like_image":like_image,"count":count})
 
 
 def search(request):
@@ -123,8 +126,10 @@ def search(request):
 
   else:
     not_searched="No user searched"
-    return render(request,'profile/profile.html',{"not_searched":not_searched})
+  return render(request,'profile/profile.html',{"not_searched":not_searched})
 
+
+@login_required(login_url='/accounts/login/')
 def profile(request,profile_id):
   current_user = request.user
   try:
@@ -196,6 +201,7 @@ def profile(request,profile_id):
   return render(request,'profile/profile.html',{"profile":profile,"images":images,"post":post,"follow_form":follow_form,})
 
 
+@login_required(login_url='/accounts/login/')
 def comment(request,image_id):
   image=Image.objects.get(pk_in=image_id)
   comments=Comments.objects.GET.get("comments")
@@ -205,6 +211,8 @@ def comment(request,image_id):
 
   return redirect('home')
 
+
+@login_required(login_url='/accounts/login/')
 def create_profile(request):
   current_user=request.user
   if request.method == 'POST':
@@ -216,7 +224,7 @@ def create_profile(request):
     return HttpResponseRedirect('/')
   else:
     form = CreateProfileForm()
-    return render(request,'create-profile.html',{"form":form})
+  return render(request,'create-profile.html',{"form":form})
 
 def like_post(request,image_id):
   image = Image.objects.get(pk=image_id)
@@ -254,13 +262,13 @@ def upload_post(request):
     profile=Profile.objects.get(user=user)
   except Profile.DoesNotExist:
     raise Http404()
-  if request.methods == 'POST':
+  if request.method == 'POST':
     form = CreatePost(request.POST,request.FILES)
     if form.is_valid():
       new_post=form.save(commit=False)
       new_post.profile = profile
       new_post.save()
-    return redirect(reversed('home'))
+    return redirect(reverse('home'))
   else:
     form = CreatePost()
   return render(request,'create_post.html',{"form":form})
