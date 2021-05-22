@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'insta.apps.InstaConfig',
     'bootstrap5',
     'cloudinary',
+    'crispy_forms',
 ]
 
 cloudinary.config(
