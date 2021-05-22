@@ -4,7 +4,7 @@ from django.shortcuts import render,redirect
 from django.http import HttpResponseRedirect,Http404
 from .models import Profile,Follow,Image,Comments
 from django.contrib.auth.models import User
-from .forms import UnfollowForm,FollowForm,CreateProfileForm
+from .forms import UnfollowForm,FollowForm,CreateProfileForm,UpdateProfile
 
 # Create your views here.
 def index(request):
@@ -217,3 +217,33 @@ def create_profile(request):
   else:
     form = CreateProfileForm()
     return render(request,'create-profile.html',{"form":form})
+
+def like_post(request,image_id):
+  image = Image.objects.get(pk=image_id)
+  is_liked=False
+  user=request.user
+  try:
+    profile=Profile.objects.get(user=user)
+  except Profile.DoesNotExist:
+    raise Http404()
+  if image.likes.filter(id=profile.id).exists():
+    image.likes.remove(profile)
+    is_liked=False
+  else:
+    image.likes.add(profile)
+    is_liked=True
+  return HttpResponseRedirect('home')
+  
+def update_profile(request):
+  user=request.user
+  if request.method == 'POST':
+    form=UpdateProfile(request.POST,request.FILES)
+    if form.is_valid():
+      profile_image = form.cleaned_data['profile_image']
+      bio = form.cleaned_data['bio']
+      update_prof=Profile(profile_image=profile_image,bio=bio,user=user)
+      update_prof.save()
+    return redirect('profile')
+  else:
+    form = UpdateProfile()
+  return render(request, 'update_prof.html',{"form":form})

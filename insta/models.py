@@ -8,7 +8,7 @@ from django.db.models.fields import DateField
 class Profile(models.Model):
   user=models.OneToOneField(User,on_delete=models.CASCADE)
   profile_image=CloudinaryField('photo')
-  bio=models.TextField()
+  bio=models.TextField(default='instagram user')
   followers=models.IntegerField(default=0)
   following=models.IntegerField(default=0)
 

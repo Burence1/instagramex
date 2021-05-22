@@ -16,3 +16,8 @@ class CreateProfileForm(ModelForm):
   class Meta:
     model = Profile
     exclude = ['followers','following']
+
+class UpdateProfile(ModelForm):
+  class Meta:
+    model = Profile
+    fields = ['bio','profile_image']
