@@ -5,8 +5,8 @@
 <div class="main row">
   <div class="col-xs-12 col-md-1"></div>
   <div class="col-xs-12 col-md-6">
-    {% if images %}
-    {% for image in images %}
+    {% if timeline_images %}
+    {% for image in timeline_images %}
     <div class="card" style="margin-bottom: 5rem;">
       <div class="card-header d-flex">
         <div class="profile-pic">
@@ -20,7 +20,7 @@
       </div>
       <img src="{{image.image.url}}" class="card-img-top" alt="upload" style="height: 40rem;object-fit: cover;">
       <div class="card-body">
-        <form action="{% url 'like_image' image_id=image.id %}">
+        <form action="{% url 'LikePost' image_id=image.id %}">
           {% csrf_token %}
           <button type="submit" name="image_id" value={{image.id}}
             style="border: 0px; background-color: transparent; margin-bottom: 1rem;"><i
@@ -28,9 +28,9 @@
         </form>
         <div class="liked-count">{{image.likes.count}} likes</div>
         <div class="post">
-          <a href="#" class="likes">{{image.profile}}</a>
+          <a href="#" class="likes"><strong>{{image.profile}}</strong></a>
           <span class="post-link">{{image.caption}}</span>
-          <div class="text-muted" style="font-size: 1.4rem;margin-top: 1%;">Comments...</div>
+          <div class="text-muted" style="font-size: 1.4rem;margin-top: 1%;">{{count}} comments</div>
           {% for comment in comments %}
           {% if comment.image.id == image.id %}
           <div>
@@ -39,14 +39,14 @@
           </div>
           {% endif %}
           {% endfor %}
-          <div class="text-muted">{{image.post_date | timesince }} ago</div>
+          <div class="text-muted">{{image.pub_date | timesince }} ago</div>
         </div>
       </div>
       <div class="card-footer" style="padding: 0;">
-        <form role="add_comment" , action="{% url 'comment' image_id=image.id %}">
+        <form role="add_comment" , action="{% url 'AddComment' image_id=image.id %}">
           {% csrf_token%}
           <div class="input-group">
-            <input type="text" class="form-control" placeholder="Add a comment" name="comment"
+            <input type="text" class="form-control" placeholder="comment" name="comments"
               style="font-size: 1.2rem; border: 0;">
             <div class="input-group-btn">
               <button class="btn" type="submit" style="font-size: 1.2rem;"> Post</button>

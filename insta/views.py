@@ -34,7 +34,7 @@ def index(request):
   for image in timeline_images:
     images=Image.objects.get(pk=image.id)
     like_image=False
-    if image.likes.filter(pk__in=index_timeline).order('-pub_date'):
+    if image.likes.filter(pk__in=index_timeline).exists():
       like_image= True
 
   image_comments=Comments.objects.all()[:4]
@@ -203,8 +203,8 @@ def profile(request,profile_id):
 
 @login_required(login_url='/accounts/login/')
 def comment(request,image_id):
-  image=Image.objects.get(pk_in=image_id)
-  comments=Comments.objects.GET.get("comments")
+  image=Image.objects.get(pk=image_id)
+  comments=request.GET.get("comments")
   current_user=request.user
   comment=Comments(image=image,comment=comments,user=current_user)
   comment.save_comment()
@@ -240,7 +240,7 @@ def like_post(request,image_id):
   else:
     image.likes.add(profile)
     is_liked=True
-  return HttpResponseRedirect('home')
+  return HttpResponseRedirect(reverse('home'))
   
 def update_profile(request):
   user=request.user
