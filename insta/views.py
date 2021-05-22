@@ -260,7 +260,7 @@ def upload_post(request):
       new_post=form.save(commit=False)
       new_post.profile = profile
       new_post.save()
-    return redirect('home')
+    return redirect(reversed('home'))
   else:
     form = CreatePost()
   return render(request,'create_post.html',{"form":form})
