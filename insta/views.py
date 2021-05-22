@@ -4,7 +4,7 @@ from django.shortcuts import render,redirect
 from django.http import HttpResponseRedirect,Http404
 from .models import Profile,Follow,Image,Comments
 from django.contrib.auth.models import User
-from .forms import UnfollowForm,FollowForm,CreateProfileForm,UpdateProfile
+from .forms import UnfollowForm,FollowForm,CreateProfileForm,UpdateProfile,CreatePost
 
 # Create your views here.
 def index(request):
@@ -247,3 +247,20 @@ def update_profile(request):
   else:
     form = UpdateProfile()
   return render(request, 'update_prof.html',{"form":form})
+
+def upload_post(request):
+  user=request.user
+  try:
+    profile=Profile.objects.get(user=user)
+  except Profile.DoesNotExist:
+    raise Http404()
+  if request.methods == 'POST':
+    form = CreatePost(request.POST,request.FILES)
+    if form.is_valid():
+      new_post=form.save(commit=False)
+      new_post.profile = profile
+      new_post.save()
+    return redirect('home')
+  else:
+    form = CreatePost()
+  return render(request,'create_post.html',{"form":form})
