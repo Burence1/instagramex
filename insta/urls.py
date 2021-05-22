@@ -7,5 +7,13 @@ from django.conf.urls.static import static
 urlpatterns = [
   path('',views.index,name='home'),
   path('upload/',views.views.upload_post,name='NewPost'),
-  path('update/',vie)
+  path('update/',views.update_profile,name='UpdateProfile'),
+  path('like/(\d+)',views.like_post,name='LikePost'),
+  path('create_profile/',views.create_profile,name='CreateProfile'),
+  path('comment/(\d+)',views.comment,name='AddComment'),
+  path('profile/(\d+)',views.profile,name='UserProfile'),
+  path('search/',views.search,name='Search'),
 ]
+
+if settings.DEBUG:
+  urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
