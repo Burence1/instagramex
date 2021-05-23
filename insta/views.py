@@ -6,6 +6,7 @@ from django.contrib.auth.models import User
 from .forms import UnfollowForm,FollowForm,CreateProfileForm,UpdateProfile,CreatePost
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse
+from .email import send_welcome_email
 
 # Create your views here.
 @login_required
