@@ -134,3 +134,14 @@ html{
 #brand{
   font-family: 'Courgette', cursive;
 }
+
+#status{
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 2em;
+}
+
+#status-pic{
+  margin-top: 1em;
+  margin-bottom: 1em;
+}

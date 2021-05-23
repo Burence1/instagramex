@@ -3,94 +3,99 @@
 {% load static %}
 {% block content %}
 <div class="main row">
-  <div class="card">
-    
-  </div>
   <div class="col-xs-12 col-md-1"></div>
   <div class="col-xs-12 col-md-6">
-    {% if timeline_images %}
-    {% for image in timeline_images %}
-    <div class="card" style="margin-bottom: 5rem;">
-      <div class="card-header d-flex">
-        <div class="prof-image">
-          <a href="/profile/{{image.profile.id}}">
-            <img class="rounded-circle img-thumbnail" style="width: 3em;height: 3em;" src="{{image.profile.profile_image.url}}"
-              alt="user">
-          </a>
-        </div>
-        <div class="profile" style="margin-left: 1em;">
-          <a href="/profile/{{image.profile.id}}" class="profile_tag" style="color: black;"><b>{{image.profile}}</b></a>
-          <p><strong><i>#{{image.name}}</i></strong></p>
-        </div>
+    <div class="row">
+      <div class="card" id="status">
+        {% for profiles in follow_suggestions %}
+        <a href="/profile/{{profiles.id}}">
+          <img class="rounded-circle img-thumbnail" id="status-pic" style="width: 4em;height: 4em; margin: 1em;" src="{{profiles.profile_image.url}}"></a>
+        {% endfor %}
+        </div> 
+    </div>
+  {% if timeline_images %}
+  {% for image in timeline_images %}
+  <div class="card" style="margin-bottom: 5rem;">
+    <div class="card-header d-flex">
+      <div class="prof-image">
+        <a href="/profile/{{image.profile.id}}">
+          <img class="rounded-circle img-thumbnail" style="width: 3em;height: 3em;"
+            src="{{image.profile.profile_image.url}}" alt="user">
+        </a>
       </div>
-      <img src="{{image.image.url}}" class="card-img-top" alt="upload" style="height: 40rem;object-fit: cover;">
-      <div class="card-body">
-        <form action="{% url 'LikePost' image_id=image.id %}">
-          {% csrf_token %}
-          <button type="submit" name="image_id" value={{image.id}}
-            style="border: 0px; background-color: transparent; margin-bottom: 1rem;"><i
-              class="far fa-heart"></i></button>
-        </form>
-        <div class="liked-count">{{image.likes.count}} likes</div>
-        <div class="post">
-          <a href="#" class="likes"><strong>{{image.profile}}</strong></a>
-          <span class="post-link">{{image.caption}}</span>
-          <div class="text-muted" style="font-size: 1.4rem;margin-top: 1%;">{{count}} comments</div>
-          {% for comment in comments %}
-          {% if comment.image.id == image.id %}
-          <div>
-            <a href="#" class="likes"><em style="font-size: 1.2rem;">{{comment.user}}</em></a>
-            <span class="post-link"><em style="font-size: 1.2rem;">{{comment.content}}</em></span>
-          </div>
-          {% endif %}
-          {% endfor %}
-          <div class="text-muted">{{image.pub_date | timesince }} ago</div>
-        </div>
-      </div>
-      <div class="card-footer" style="padding: 0;">
-        <form role="add_comment" , action="{% url 'AddComment' image_id=image.id %}">
-          {% csrf_token%}
-          <div class="input-group">
-            <input type="text" class="form-control" placeholder="comment" name="comments"
-              style="font-size: 1.2rem; border: 0;">
-            <div class="input-group-btn">
-              <button class="btn" type="submit" style="font-size: 1.2rem;"> Post</button>
-            </div>
-          </div>
-        </form>
+      <div class="profile" style="margin-left: 1em;">
+        <a href="/profile/{{image.profile.id}}" class="profile_tag" style="color: black;"><b>{{image.profile}}</b></a>
+        <p><strong><i>#{{image.name}}</i></strong></p>
       </div>
     </div>
-    {% endfor %}
-    {% else %}
-    <div class="nothing text-center">
-      <h2>Added posts will be displayed here</h2>
-    </div>
-    {% endif %}
-  </div>
-  <div class="col-xs-12 col-md-1"></div>
-  <div class="col-xs-12 col-md-3">
-    <div class="card">
-      <div class="card-header" style="font-size: 1.2rem;">
-        <h5><strong>Follow Suggestions</strong></h5>
-      </div>
-      <ul class="list-group list-group-flush">
-        {% for users in follow_suggestions %}
-        {% if users == profile%}
-        {% elif users != profile %}
-        <li class="list-group-item d-flex">
-          <div class="profile-image">
-            <a href="/profile/{{users.id}}"><img src="{{users.profile_image.url}}" alt="avatar" class="rounded-circle"
-                style="height: 3em;width: 3em;"></a>
-          </div>
-          <div class="profile">
-            <a href="/profile/{{users.id}}" class="profile_tag" style="color: black; margin-left: 1em; text-transform: capitalize;">{{users.user.username}}</a>
-          </div>
-        </li>
+    <img src="{{image.image.url}}" class="card-img-top" alt="upload" style="height: 40rem;object-fit: cover;">
+    <div class="card-body">
+      <form action="{% url 'LikePost' image_id=image.id %}">
+        {% csrf_token %}
+        <button type="submit" name="image_id" value={{image.id}}
+          style="border: 0px; background-color: transparent; margin-bottom: 1rem;"><i class="far fa-heart"></i></button>
+      </form>
+      <div class="liked-count">{{image.likes.count}} likes</div>
+      <div class="post">
+        <a href="#" class="likes"><strong>{{image.profile}}</strong></a>
+        <span class="post-link">{{image.caption}}</span>
+        <div class="text-muted" style="font-size: 1.4rem;margin-top: 1%;">{{count}} comments</div>
+        {% for comment in comments %}
+        {% if comment.image.id == image.id %}
+        <div>
+          <a href="#" class="likes"><em style="font-size: 1.2rem;">{{comment.user}}</em></a>
+          <span class="post-link"><em style="font-size: 1.2rem;">{{comment.content}}</em></span>
+        </div>
         {% endif %}
         {% endfor %}
-      </ul>
+        <div class="text-muted">{{image.pub_date | timesince }} ago</div>
+      </div>
+    </div>
+    <div class="card-footer" style="padding: 0;">
+      <form role="add_comment" , action="{% url 'AddComment' image_id=image.id %}">
+        {% csrf_token%}
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="comment" name="comments"
+            style="font-size: 1.2rem; border: 0;">
+          <div class="input-group-btn">
+            <button class="btn" type="submit" style="font-size: 1.2rem;"> Post</button>
+          </div>
+        </div>
+      </form>
     </div>
   </div>
-  <div class="col-xs-12 col-md-1"></div>
+  {% endfor %}
+  {% else %}
+  <div class="nothing text-center">
+    <h2>Added posts will be displayed here</h2>
+  </div>
+  {% endif %}
+</div>
+<div class="col-xs-12 col-md-1"></div>
+<div class="col-xs-12 col-md-3">
+  <div class="card">
+    <div class="card-header" style="font-size: 1.2rem;">
+      <h5><strong>Follow Suggestions</strong></h5>
+    </div>
+    <ul class="list-group list-group-flush">
+      {% for users in follow_suggestions %}
+      {% if users == profile%}
+      {% elif users != profile %}
+      <li class="list-group-item d-flex">
+        <div class="profile-image">
+          <a href="/profile/{{users.id}}"><img src="{{users.profile_image.url}}" alt="avatar" class="rounded-circle"
+              style="height: 3em;width: 3em;"></a>
+        </div>
+        <div class="profile">
+          <a href="/profile/{{users.id}}" class="profile_tag"
+            style="color: black; margin-left: 1em; text-transform: capitalize;">{{users.user.username}}</a>
+        </div>
+      </li>
+      {% endif %}
+      {% endfor %}
+    </ul>
+  </div>
+</div>
+<div class="col-xs-12 col-md-1"></div>
 </div>
 {% endblock %}
