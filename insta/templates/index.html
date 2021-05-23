@@ -41,7 +41,7 @@
         <div class="post">
           <strong><b>{{image.profile}}</b></strong>
           <span class="post-link">{{image.caption}}</span>
-          <div class="text-muted" style="margin-top: 1%;">{{count}} comment(s)</div>
+          <div class="text-muted" style="margin-top: 1%;">Comment(s)</div>
           {% for comment in image_comments %}
           {% if comment.image.id == image.id %}
           <div>
@@ -57,7 +57,7 @@
         <form role="add_comment" , action="{% url 'AddComment' image_id=image.id %}">
           {% csrf_token%}
           <div class="input-group">
-            <input type="text" class="form-control" placeholder="comment" name="comments"
+            <input type="text" class="form-control" placeholder="Add a comment..." name="comments"
               style="font-size: 1.2rem; border: 0;">
             <div class="input-group-btn">
               <button class="btn" type="submit" style="font-size: 1.2rem;"> Post</button>
@@ -108,7 +108,7 @@
           </div>
           <div class="profile">
             <a href="/profile/{{users.id}}" class="profile_tag"
-              style="color: black; margin-left: 1em; text-transform: capitalize; margin-top: auto;margin-bottom: auto;"><b>{{users.user.username}}</b></a>
+              style="text-decoration: none; color: black; margin-left: 1em; text-transform: capitalize; margin-top: auto;margin-bottom: auto;"><b>{{users.user.username}}</b></a>
           </div>
         </div>
         {% endif %}

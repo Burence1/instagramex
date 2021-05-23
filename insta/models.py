@@ -2,7 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from cloudinary.models import CloudinaryField
 from django.db.models.deletion import CASCADE
-from django.db.models.fields import DateField
+from django.db.models.fields import DateTimeField
 
 # Create your models here.  
 class Profile(models.Model):
@@ -23,7 +23,7 @@ class Image(models.Model):
   image = CloudinaryField('photo')
   caption = models.TextField(blank=True)
   name = models.CharField(max_length=30)
-  pub_date = models.DateField(auto_now_add=True)
+  pub_date = models.DateTimeField(auto_now_add=True)
   profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
   likes=models.ManyToManyField(Profile,related_name="posts")
 
@@ -35,7 +35,7 @@ class Image(models.Model):
 
   def __str__(self):
     return self.name
-
+  
   def update_caption(self,updated_caption):
     self.caption= updated_caption
     self.save()
@@ -52,7 +52,7 @@ class Image(models.Model):
 
 class Comments(models.Model):
   comment=models.TextField()
-  pub_date=models.DateField(auto_now_add=True)
+  pub_date=models.DateTimeField(auto_now_add=True)
   user=models.ForeignKey(User, on_delete=models.CASCADE)
   image=models.ForeignKey(Image, on_delete=models.CASCADE, related_name="comments")
   
