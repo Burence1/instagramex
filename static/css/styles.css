@@ -130,3 +130,7 @@ body {
 html{
   overflow-x: hidden;
 }
+
+#brand{
+  font-family: 'Courgette', cursive;
+}

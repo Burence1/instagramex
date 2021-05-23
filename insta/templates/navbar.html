@@ -1,4 +1,7 @@
 <div class="navigation">
+  <div class="brand">
+    <h1 class="brand" id="brand">INSTAGRAMEX</h1>
+  </div>
   <form role="search" class="form-inline" action="{% url 'Search' %}">
     <div class="input-group">
       <input type="text" class="form-control" placeholder="Search" aria-label="Username" aria-describedby="basic-addon1"
@@ -30,7 +33,7 @@
       </div>
       <div class="modal-body text-left">
         <ul>
-          <li><a href="/profile/{{profile.id}}">Profile</a></li>
+          <li><a href="/profile/{{request.user.id}}">Profile</a></li>
           <li><a href="/upload/image">Upload Image</a></li>
           <li><a href="/logout">Logout</a></li>
         </ul>

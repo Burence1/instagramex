@@ -3,20 +3,23 @@
 {% load static %}
 {% block content %}
 <div class="main row">
+  <div class="card">
+    
+  </div>
   <div class="col-xs-12 col-md-1"></div>
   <div class="col-xs-12 col-md-6">
     {% if timeline_images %}
     {% for image in timeline_images %}
     <div class="card" style="margin-bottom: 5rem;">
       <div class="card-header d-flex">
-        <div class="profile-image">
+        <div class="prof-image">
           <a href="/profile/{{image.profile.id}}">
-            <img class="rounded-circle" style="width: 3em;height: 3em;" src="{{image.profile.profile_image.url}}"
+            <img class="rounded-circle img-thumbnail" style="width: 3em;height: 3em;" src="{{image.profile.profile_image.url}}"
               alt="user">
           </a>
         </div>
         <div class="profile" style="margin-left: 1em;">
-          <a href="/profile/{{image.profile.id}}" class="profile_tag" style="color: black;">{{image.profile}}</a>
+          <a href="/profile/{{image.profile.id}}" class="profile_tag" style="color: black;"><b>{{image.profile}}</b></a>
           <p><strong><i>#{{image.name}}</i></strong></p>
         </div>
       </div>
@@ -60,9 +63,7 @@
     {% endfor %}
     {% else %}
     <div class="nothing text-center">
-      <h2>Nothing to see</h2>
-      <h2>Get started on Instagram by following an Instagram user or share an image to see images on the timeline.
-      </h2>
+      <h2>Added posts will be displayed here</h2>
     </div>
     {% endif %}
   </div>
@@ -73,16 +74,16 @@
         <h5><strong>Follow Suggestions</strong></h5>
       </div>
       <ul class="list-group list-group-flush">
-        {% for prof in follow_suggestions %}
-        {% if prof == profile%}
-        {% elif prof != profile %}
+        {% for users in follow_suggestions %}
+        {% if users == profile%}
+        {% elif users != profile %}
         <li class="list-group-item d-flex">
           <div class="profile-image">
-            <a href="/profile/{{prof.id}}"><img src="{{prof.profile_image.url}}" alt="avatar" class="rounded-circle"
+            <a href="/profile/{{users.id}}"><img src="{{users.profile_image.url}}" alt="avatar" class="rounded-circle"
                 style="height: 3em;width: 3em;"></a>
           </div>
           <div class="profile">
-            <a href="/profile/{{prof.id}}" class="profile_tag">{{prof.user.username}}</a>
+            <a href="/profile/{{users.id}}" class="profile_tag" style="color: black; margin-left: 1em; text-transform: capitalize;">{{users.user.username}}</a>
           </div>
         </li>
         {% endif %}
