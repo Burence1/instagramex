@@ -2,12 +2,12 @@
 {% load static %}
 {% load bootstrap4 %}
 {% block content %}
-<div id="wrapper" id="content">
+<div id="content">
   <div class="register">
     <div class="form-data form-data-prof">
       <form action="{%url 'create_profile'%}" method="post" enctype="multipart/form-data">
         {% csrf_token %}
-        <h2 class="intro">Create a profile to start using Instagram</h2>
+        <h2 class="intro">Create your Instagramex profile</h2>
         {% bootstrap_form form%}
         <button class="form-btn" type="submit">Create Profile</button>
       </form>

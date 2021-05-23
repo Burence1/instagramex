@@ -253,7 +253,7 @@ def update_profile(request):
     return redirect('profile')
   else:
     form = UpdateProfile()
-  return render(request, 'update_prof.html',{"form":form})
+  return render(request, '.html',{"form":form})
 
 def upload_post(request):
   user=request.user
