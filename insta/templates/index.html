@@ -6,12 +6,14 @@
   <div class="col-xs-12 col-md-1"></div>
   <div class="col-xs-12 col-md-6">
     <div class="row">
+      <div class="col-md-12">
       <div class="card" id="status">
         {% for profiles in follow_suggestions %}
         <a href="/profile/{{profiles.id}}">
           <img class="rounded-circle img-thumbnail" id="status-pic" style="width: 4em;height: 4em; margin: 1em;"
             src="{{profiles.profile_image.url}}"></a>
         {% endfor %}
+      </div>
       </div>
     </div>
     {% if timeline_images %}
@@ -162,7 +164,7 @@
   <!-- Footer Links -->
 
   <!-- Copyright -->
-  <div class="footer-copyright text-center py-3 ma" style="margin-bottom: 0% !important;">© 2021 Copyright: Instagramex from Facebook
+  <div class="footer-copyright text-center py-3 ma" style="color: #808080; margin-bottom: 0% !important; ">© 2021 Copyright: Instagramex from Facebook<br>
   </div>
   <!-- Copyright -->
 </footer>
