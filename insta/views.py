@@ -28,7 +28,7 @@ def index(request):
     for images in followed_images:
       index_timeline.append(images.id)
 
-  timeline_images=Image.objects.filter(pk__in=index_timeline).order_by('-pub_date')
+  timeline_images=Image.objects.filter(pk__in=index_timeline)
   like_image=False
   for image in timeline_images:
     images=Image.objects.get(pk=image.id)
@@ -36,13 +36,14 @@ def index(request):
     if image.likes.filter(pk__in=index_timeline).exists():
       like_image= True
 
-  image_comments=Comments.objects.all()[:4]
+  all_profiles=Profile.objects.all()
+  image_comments=Comments.objects.all()[:3]
   total_comments=Comments.objects.all()
   count=len(total_comments)
   follow_suggestions=Profile.objects.all()[:6]
   title = "Instagramex"
 
-  return render(request,'index.html',{"title":title,"profile":profile,"timeline_images":timeline_images,"image_comments":image_comments,"follow_suggestions":follow_suggestions,"like_image":like_image,"count":count})
+  return render(request,'index.html',{"all_profiles":all_profiles,"title":title,"profile":profile,"timeline_images":timeline_images,"image_comments":image_comments,"follow_suggestions":follow_suggestions,"like_image":like_image,"count":count,"image_comments":image_comments})
 
 
 def search(request):

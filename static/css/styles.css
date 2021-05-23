@@ -135,6 +135,7 @@ html{
   font-family: 'Courgette', cursive;
 }
 
+
 #status{
   display: flex;
   flex-direction: row;
@@ -144,4 +145,16 @@ html{
 #status-pic{
   margin-top: 1em;
   margin-bottom: 1em;
+}
+
+#mini-profile{
+  position: fixed;
+  margin-bottom: 2em;
+}
+
+.list-unstyled{
+  display: flex;
+  flex-direction: row;
+  text-align: center;
+  justify-content: space-evenly;
 }

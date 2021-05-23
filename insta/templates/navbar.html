@@ -1,6 +1,6 @@
 <div class="navigation">
   <div class="brand">
-    <a href="/" style="color: #000;"><h1 class="brand" id="brand">INSTAGRAMEX</h1></a>
+    <a href="/" style="color: #000; text-decoration: none;"><h1 class="brand" id="brand">INSTAGRAMEX</h1></a>
   </div>
   <form role="search" class="form-inline" action="{% url 'Search' %}">
     <div class="input-group">
@@ -11,12 +11,10 @@
       </div>
     </div>
   </form>
-
-  <div class="nav-icons">
-    <a href="/"><i class="fas fa-home"></i></a>
-    <a href="/upload/image"><i class="fas fa-share-alt"></i></i></a>
+  <div class="navigation-icons">
+    <a href="/"><i class="fa fa-home" aria-hidden="true" style="color: black;"></i></a>
     <a href="#" data-toggle="modal" data-target="#myModal">
-      <i class="fas fa-user"></i>
+      <i class="far fa-user-circle" style="color: black; margin-left: 2em;"></i>
     </a>
   </div>
 
