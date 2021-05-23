@@ -49,21 +49,21 @@ def search(request):
   if 'user' in request.GET and request.GET['user']:
     searched_profile = request.GET.get("user")
     try:
-      user = Profile.search_profile(searched_profile).first()
-      user_id = user.id
+      user = Profile.search_profile(searched_profile)
+      profile_id = user[0].id
     except User.DoesNotExist:
       raise Http404()
     current_user = request.user
     try:
-      profile = Profile.objects.get(id=user_id)
+      profile = Profile.objects.get(id=profile_id)
     except Profile.DoesNotExist:
       raise Http404()
     try:
-      prof_follower = Profile.objects.get(user=current_user)
+      profile_following = Profile.objects.get(user=current_user)
     except Profile.DoesNotExist:
       raise Http404()
     try:
-      prof_followed = Profile.objects.get(user=current_user)
+      profile_followed = Profile.objects.get(id=profile_id)
     except Profile.DoesNotExist:
       raise Http404()
 
@@ -72,40 +72,39 @@ def search(request):
         form = FollowForm(request.POST)
         if form.is_valid():
           new_followed = form.save(commit=False)
-          new_followed.followed = prof_followed
-          new_followed.follower = prof_follower
+          new_followed.followed = profile_followed
+          new_followed.follower = profile_following
           new_followed.save()
-          user_following = Follow.objects.filter(followed=prof_followed)
+          user_following = Follow.objects.filter(followed=profile_followed)
           following_stats = len(user_following)
-          prof_followed.following = following_stats
-          prof_followed.save()
+          profile_followed.followers = following_stats
+          profile_followed.save()
 
-          user_followers = Follow.objects.filter(follower=prof_follower)
+          user_followers = Follow.objects.filter(follower=profile_following)
           followers_stats = len(user_followers)
-          prof_follower.followers = followers_stats
-          prof_follower.save()
+          profile_following.following = followers_stats
+          profile_following.save()
 
-        return HttpResponseRedirect(reverse('UserProfile'))
+        return HttpResponseRedirect(f'/profile/{profile_id}')
 
       elif 'unfollow' in request.POST:
         form = UnfollowForm(request.POST)
         if form.is_valid():
           new_unfollow = form.save(commit=False)
-          new_unfollow.followed = prof_followed
-          new_unfollow.follower = prof_follower
+          new_unfollow= Follow.objects.filter(followed = profile_followed, follower = profile_following)
           new_unfollow.delete()
 
-          user_following = Follow.objects.filter(followed=prof_followed)
+          user_following = Follow.objects.filter(followed=profile_followed)
           following_stats = len(user_following)
-          prof_followed.following = following_stats
-          prof_followed.save()
+          profile_followed.followers = following_stats
+          profile_followed.save()
 
-          user_followers = Follow.objects.filter(follower=prof_follower)
+          user_followers = Follow.objects.filter(follower=profile_following)
           followers_stats = len(user_followers)
-          prof_follower.followers = followers_stats
-          prof_follower.save()
+          profile_following.following = followers_stats
+          profile_following.save()
 
-        return HttpResponseRedirect(reverse('UserProfile'))
+        return HttpResponseRedirect(f'/profile/{profile_id}')
 
     else:
       follow_form = FollowForm()
@@ -116,7 +115,7 @@ def search(request):
     post = len(images)
 
     is_following = Follow.objects.filter(
-        followed=prof_followed, follower=prof_follower)
+        followed=profile_followed, follower=profile_following)
 
     if is_following:
       return render(request, 'profile/profile.html', {"profile": profile, "post": post, "images": images, "unfollow_form": unfollow_form})
@@ -135,11 +134,11 @@ def profile(request,profile_id):
   except Profile.DoesNotExist:
     raise Http404()
   try:
-    prof_follower=Profile.objects.get(user=current_user)
+    profile_following=Profile.objects.get(user=current_user)
   except Profile.DoesNotExist:
     raise Http404()
   try:
-    prof_followed=Profile.objects.get(id=profile_id)
+    profile_followed=Profile.objects.get(id=profile_id)
   except Profile.DoesNotExist:
     raise Http404()
 
@@ -147,19 +146,20 @@ def profile(request,profile_id):
     if 'follow' in request.POST:
       form = FollowForm(request.POST)
       if form.is_valid():
-        new_followed=form.save(commit=False)
-        new_followed.followed=prof_followed
-        new_followed.following=prof_follower
+        new_followed = form.save(commit=False)
+        new_followed.followed = profile_followed
+        new_followed.follower = profile_following
         new_followed.save()
-        user_following=Follow.objects.filter(followed=prof_followed)
-        following_stats=len(user_following)
-        prof_followed.followers=following_stats
-        prof_followed.save()
+        user_following = Follow.objects.filter(followed=profile_followed)
+        following_stats = len(user_following)
+        profile_followed.followers = following_stats
+        profile_followed.save()
 
-        user_followers=Follow.objects.filter(follower=prof_follower)
-        followers_stats=len(user_followers)
-        prof_follower.followers=followers_stats
-        prof_follower.save()
+        user_followers = Follow.objects.filter(follower=profile_following)
+        followers_stats = len(user_followers)
+        profile_following.following = followers_stats
+        profile_following.save()
+
         
       return HttpResponseRedirect(f'/profile/{profile_id}')
 
@@ -167,20 +167,19 @@ def profile(request,profile_id):
     elif 'unfollow' in request.POST:
       form = UnfollowForm(request.POST)
       if form.is_valid():
-        new_unfollow=form.save(commit=False)
-        new_unfollow.followed = prof_followed
-        new_unfollow.follower = prof_follower
+        new_unfollow = form.save(commit=False)
+        new_unfollow= Follow.objects.filter(followed = profile_followed, follower = profile_following)
         new_unfollow.delete()
 
-        user_following=Follow.objects.filter(followed=prof_followed)
-        following_stats=len(user_following)
-        prof_followed.following=following_stats
-        prof_followed.save()
+        user_following = Follow.objects.filter(followed=profile_followed)
+        following_stats = len(user_following)
+        profile_followed.followers = following_stats
+        profile_followed.save()
 
-        user_followers=Follow.objects.filter(follower=prof_follower)
-        followers_stats=len(user_followers)
-        prof_follower.followers=followers_stats
-        prof_follower.save()
+        user_followers = Follow.objects.filter(follower=profile_following)
+        followers_stats = len(user_followers)
+        profile_following.following = followers_stats
+        profile_following.save()
 
       return HttpResponseRedirect(f'/profile/{profile_id}')
 
@@ -193,7 +192,7 @@ def profile(request,profile_id):
 
   post=len(images)
 
-  is_following=Follow.objects.filter(followed=prof_followed,follower=prof_follower)
+  is_following=Follow.objects.filter(followed=profile_followed,follower=profile_following)
 
   if is_following:
     return render(request,'profile/profile.html',{"profile":profile,"post":post,"images":images,"unfollow_form":unfollow_form})

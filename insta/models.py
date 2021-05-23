@@ -12,13 +12,12 @@ class Profile(models.Model):
   followers=models.IntegerField(default=0)
   following=models.IntegerField(default=0)
 
-  @classmethod
-  def search_profile(cls, username):
-    return User.objects.filter(username=username)
-
   def __str__(self):
     return self.user.username
 
+  @classmethod
+  def search_profile(cls, username):
+    return User.objects.filter(username=username)
 
 class Image(models.Model):
   image = CloudinaryField('photo')
@@ -75,8 +74,8 @@ class Comments(models.Model):
 
 class Follow(models.Model):
   posted = models.DateTimeField(auto_now_add=True)
-  followed = models.ForeignKey(Profile,on_delete=models.CASCADE,related_name="prof_followed")
-  follower = models.ForeignKey(Profile,on_delete=models.CASCADE,related_name="prof_follower")
+  followed = models.ForeignKey(Profile,on_delete=models.CASCADE,related_name="profile_followed")
+  follower = models.ForeignKey(Profile,on_delete=models.CASCADE,related_name="profile_following")
 
   def __str__(self):
     return self.pk

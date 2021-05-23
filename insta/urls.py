@@ -11,7 +11,7 @@ urlpatterns = [
   re_path('like/(?P<image_id>\d+)',views.like_post,name='LikePost'),
   path('create_profile/',views.create_profile,name='create_profile'),
   re_path('comment/(?P<image_id>\d+)',views.comment,name='AddComment'),
-  re_path('profile/(?P<profile_id>\d+)',views.profile,name='UserProfile'),
+  re_path('profile/(?P<profile_id>\d+)',views.profile,name='profile'),
   path('search/',views.search,name='Search'),
 ]
 
