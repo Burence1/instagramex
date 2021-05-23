@@ -81,21 +81,21 @@
       <div class="card-body">
         <div class="row d-flex">
           <div class="prof-img">
-            <img class="rounded-circle img-thumbnail" style="width: 3em;height: 3em;"
+            <img class="rounded-circle img-thumbnail" style="position: fixed; width: 3em;height: 3em;"
               src="{{profile.profile_image.url}}" alt="user">
           </div>
-          <div class="u-name" style="margin-left: 2em; margin-top: auto; margin-bottom: auto;">
+          <div class="u-name" style="position: fixed; margin-left: 4em; margin-top: auto; margin-bottom: auto;">
             <h5><strong>{{profile.user.username}}</strong></h5>
           </div>
-          <div class="col-md-3"></div>
         </div>
       </div>
     </div>
     {% endif %}
     {% endfor %}
+    <br><br>
     <div style="position: fixed; border: transparent;">
       <div style="font-size: 1.2rem; border: transparent;">
-        <h5 style="color: #808080;"><strong>Follow Suggestions</strong></h5>
+        <h6 style="color: #808080;"><strong>Follow Suggestions For You:</strong></h6>
       </div>
       <ul class="list-group list-group-flush" style="background-color: transparent;">
         {% for users in follow_suggestions %}
@@ -120,7 +120,6 @@
 </div>
 <!-- Footer -->
 <footer class="page-footer" style="color: #808080;">
-
   <!-- Footer Links -->
   <div class="container-fluid text-center">
     <div class="row">
