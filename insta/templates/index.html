@@ -16,7 +16,7 @@
           </a>
         </div>
         <div class="profile">
-          <a href="/profile/{{image.profile.id}}" class="profile_tag">{{image.profile}}</a>
+          <a href="/profile/{{image.profile.id}}" class="profile_tag" style="color: black;">{{image.profile}}</a>
         </div>
       </div>
       <img src="{{image.image.url}}" class="card-img-top" alt="upload" style="height: 40rem;object-fit: cover;">
@@ -69,7 +69,7 @@
   <div class="col-xs-12 col-md-3">
     <div class="card">
       <div class="card-header" style="font-size: 1.2rem;">
-        <h3><strong>Follow Suggestions</strong></h3>
+        <h5><strong>Follow Suggestions</strong></h5>
       </div>
       <ul class="list-group list-group-flush">
         {% for prof in follow_suggestions %}

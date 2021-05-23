@@ -5,7 +5,7 @@
 <div id="wrapper" id="content">
   <div class="register">
     <div class="form-data form-data-prof">
-      <form action="{%url 'CreateProfile'%}" method="post" enctype="multipart/form-data">
+      <form action="{%url 'create_profile'%}" method="post" enctype="multipart/form-data">
         {% csrf_token %}
         <h2 class="intro">Create a profile to start using Instagram</h2>
         {% bootstrap_form form%}

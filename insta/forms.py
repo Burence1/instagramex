@@ -16,7 +16,7 @@ class UnfollowForm(ModelForm):
 class CreateProfileForm(ModelForm):
   class Meta:
     model = Profile
-    exclude = ['followers','following']
+    exclude = ['user','followers','following']
 
 class UpdateProfile(ModelForm):
   class Meta:

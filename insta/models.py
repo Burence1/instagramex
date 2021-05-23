@@ -8,7 +8,7 @@ from django.db.models.fields import DateField
 class Profile(models.Model):
   user=models.OneToOneField(User,on_delete=models.CASCADE)
   profile_image=CloudinaryField('photo')
-  bio=models.TextField(default='instagram user')
+  bio=models.TextField(blank=True)
   followers=models.IntegerField(default=0)
   following=models.IntegerField(default=0)
 
@@ -25,7 +25,7 @@ class Image(models.Model):
   caption = models.TextField(blank=True)
   name = models.CharField(max_length=30)
   pub_date = models.DateField(auto_now_add=True)
-  profile = models.ForeignKey(Profile, on_delete=CASCADE)
+  profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
   likes=models.ManyToManyField(Profile,related_name="posts")
 
   def save_image(self):
