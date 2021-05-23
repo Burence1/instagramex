@@ -159,3 +159,10 @@ html{
   text-align: center;
   justify-content: space-evenly;
 }
+
+#user-posts{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr) !important;
+  grid-gap: 1em;
+  grid-auto-rows: auto;
+}
