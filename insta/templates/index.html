@@ -106,7 +106,7 @@
             <a href="/profile/{{users.id}}"><img src="{{users.profile_image.url}}" alt="avatar" class="rounded-circle"
                 style="height: 3em;width: 3em;"></a>
           </div>
-          <div class="profile">
+          <div class="profile">  
             <a href="/profile/{{users.id}}" class="profile_tag"
               style="text-decoration: none; color: black; margin-left: 1em; text-transform: capitalize; margin-top: auto;margin-bottom: auto;"><b>{{users.user.username}}</b></a>
           </div>
@@ -119,9 +119,9 @@
   <div class="col-xs-12 col-md-1"></div>
 </div>
 <!-- Footer -->
-<footer class="page-footer" style="color: #808080;">
+<footer>
   <!-- Footer Links -->
-  <div class="container-fluid text-center">
+  <div class="container-fluid text-center" style="color: #808080; margin-bottom: 0% !important;">
     <div class="row">
       <div class="col-md-2"></div>
       <div class="col-md-8">
@@ -162,10 +162,9 @@
   <!-- Footer Links -->
 
   <!-- Copyright -->
-  <div class="footer-copyright text-center py-3">© 2021 Copyright: Instagramex from Facebook
+  <div class="footer-copyright text-center py-3 ma" style="margin-bottom: 0% !important;">© 2021 Copyright: Instagramex from Facebook
   </div>
   <!-- Copyright -->
-
 </footer>
 <!-- Footer -->
 {% endblock %}

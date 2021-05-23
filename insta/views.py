@@ -30,12 +30,6 @@ def index(request):
       index_timeline.append(images.id)
 
   timeline_images=Image.objects.filter(pk__in=index_timeline).order_by('-pub_date')
-  like_image=False
-  for image in timeline_images:
-    images=Image.objects.get(pk=image.id)
-    like_image=False
-    if image.likes.filter(pk__in=index_timeline).exists():
-      like_image= True
 
   all_profiles=Profile.objects.all()
   comments=Comments.objects.all()[:5]
@@ -43,8 +37,9 @@ def index(request):
   follow_suggestions=Profile.objects.all()[:6]
   title = "Instagramex"
 
-  return render(request,'index.html',{"all_profiles":all_profiles,"title":title,"profile":profile,"timeline_images":timeline_images,"follow_suggestions":follow_suggestions,"like_image":like_image,"image_comments":comments})
+  return render(request,'index.html',{"all_profiles":all_profiles,"title":title,"profile":profile,"timeline_images":timeline_images,"follow_suggestions":follow_suggestions,"image_comments":comments})
 
+@login_required
 def welcome_mail(request):
   user=request.user
   email=user.email
