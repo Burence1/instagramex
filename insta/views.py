@@ -45,6 +45,12 @@ def index(request):
 
   return render(request,'index.html',{"all_profiles":all_profiles,"title":title,"profile":profile,"timeline_images":timeline_images,"follow_suggestions":follow_suggestions,"like_image":like_image,"image_comments":comments})
 
+def welcome_mail(request):
+  user=request.user
+  email=user.email
+  name=user.username
+  send_welcome_email(email,name)
+  return redirect(create_profile)
 
 def search(request):
   if 'user' in request.GET and request.GET['user']:
