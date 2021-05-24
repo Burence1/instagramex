@@ -67,9 +67,6 @@ body {
     padding: 0 20px;
     justify-content: space-between;
   }
-  .navigation-search-container {
-    display: none;
-  }
   .navigation-icons {
     display: flex;
   }
@@ -165,4 +162,73 @@ html{
   grid-template-columns: repeat(3, 1fr) !important;
   grid-gap: 1em;
   grid-auto-rows: auto;
+}
+
+
+@media(max-width: 450px){
+  footer{
+      padding-bottom: 2rem;
+  }
+  body{
+    width: 100% !important;
+    max-width: 100% !important;
+    overflow-x: hidden;
+  }
+  *{
+    width: 100%;
+    max-width: 100%;
+  }
+}
+
+ @media screen and (max-width: 400px){
+    aside .col{
+      width: 100%;
+      padding: 10px;
+    }
+
+    .navigation-icons,.form-inline{
+      display: flex;
+      flex-direction: row;
+      flex-wrap: nowrap;
+    }
+    body{
+      width: 100%;
+    }
+
+  }
+
+  @media (max-width: 1024px){
+
+  .form-inline{
+    display: flex;
+    flex-wrap: nowrap;
+  }
+
+  #reg{
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+  footer .container-fluid{
+        padding: 0 2rem;
+        justify-content: center;
+    }
+  #wrapper{
+    width: fit-content;
+  }
+  .brand{
+    display: none;
+  }
+
+  .nav ul{
+        justify-content: center;
+    }
+
+  .nav ul li{
+        margin-bottom: 1rem;
+    }
+    body{
+      width: 100%;
+      overflow-x: hidden;
+    }
 }

@@ -4,3 +4,27 @@ body{
   color: whitesmoke;
   height: 40em;
 }
+
+@media (max-width: 1024px){
+
+  #reg{
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+  footer .container-fluid{
+        padding: 0 2rem;
+        justify-content: center;
+    }
+  #wrapper{
+    width: fit-content;
+  }
+
+  .nav ul{
+        justify-content: center;
+    }
+
+  .-nav ul li{
+        margin-bottom: 1rem;
+    }
+}

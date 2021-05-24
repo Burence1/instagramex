@@ -5,7 +5,7 @@
 <div class="main row">
   <div class="col-xs-12 col-md-1"></div>
   <div class="col-xs-12 col-md-6">
-    <div class="row">
+    <div class="row" id="wrapper">
       <div class="col-md-12">
         <div class="card" id="status">
           {% for profiles in follow_suggestions %}
@@ -88,6 +88,7 @@
           </div>
           <div class="u-name" style="position: fixed; margin-left: 4em; margin-top: auto; margin-bottom: auto;">
             <h5 style="text-transform: capitalize;"><strong>{{profile.user.username}}</strong></h5>
+            <h6 class="text-muted">{{profile.followers}} followers | {{profile.following}} followed</h6>
           </div>
         </div>
       </div>
