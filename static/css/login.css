@@ -5,7 +5,7 @@ body{
   height: 40em;
 }
 
-@media (max-width: 1024px){
+@media (max-width: 550px){
 
   #reg{
         margin-left: auto;
