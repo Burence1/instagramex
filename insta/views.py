@@ -47,6 +47,7 @@ def welcome_mail(request):
   send_welcome_email(name,email)
   return redirect(create_profile)
 
+@login_required
 def search(request):
   if 'user' in request.GET and request.GET['user']:
     searched_profile = request.GET.get("user")
@@ -222,6 +223,7 @@ def create_profile(request):
     form = CreateProfileForm()
   return render(request,'create-profile.html',{"form":form})
 
+@login_required
 def like_post(request,image_id):
   image = Image.objects.get(pk=image_id)
   is_liked=False
@@ -238,6 +240,7 @@ def like_post(request,image_id):
     is_liked=True
   return HttpResponseRedirect(reverse('home'))
   
+@login_required
 def update_profile(request):
   user=request.user
   if request.method == 'POST':
@@ -252,6 +255,7 @@ def update_profile(request):
     form = UpdateProfile()
   return render(request, '.html',{"form":form})
 
+@login_required
 def upload_post(request):
   user=request.user
   try:
@@ -269,6 +273,7 @@ def upload_post(request):
     form = CreatePost()
   return render(request,'create_post.html',{"form":form})
 
+@login_required
 def single_post(request,image_id):
   try:
     image=Image.objects.get(id=image_id)
