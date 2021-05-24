@@ -4,18 +4,23 @@
 ## Description
 {Instagramex provides a platform for users to enjoy Instagram-like functionalities}
 
-## Homepage
+## Homepage/Timeline
 <img src="./static/images/home.png"
      alt="Homepage"
      style="float: center; margin-right: 10px;" />
 
-## Single Image
-<img src="./static/images/image.png"
+## Single Post
+<img src="./static/images/single.png"
      alt="Homepage"
      style="float: center; margin-right: 10px;" />
 
-## Search By Category
+## Search Page
 <img src="./static/images/search.png"
+     alt="Homepage"
+     style="float: center; margin-right: 10px;" />
+
+## User Profile Page
+<img src="./static/images/profile.png"
      alt="Homepage"
      style="float: center; margin-right: 10px;" />
 
@@ -32,7 +37,7 @@
 * Users can view their posts alongside followed users' posts 
 * Users can view searched users' profiles
 * Users can search for users by userames
-* Users can view an expanded version of a single post in another page
+* Users can view an expanded version of a single post with it's details in another page
 * Users can follow & unfollow other instagramex users
 * Users can like posts
 
