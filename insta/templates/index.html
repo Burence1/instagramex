@@ -7,13 +7,13 @@
   <div class="col-xs-12 col-md-6">
     <div class="row">
       <div class="col-md-12">
-      <div class="card" id="status">
-        {% for profiles in follow_suggestions %}
-        <a href="/profile/{{profiles.id}}">
-          <img class="rounded-circle img-thumbnail" id="status-pic" style="width: 4em;height: 4em; margin: 1em;"
-            src="{{profiles.profile_image.url}}"></a>
-        {% endfor %}
-      </div>
+        <div class="card" id="status">
+          {% for profiles in follow_suggestions %}
+          <a href="/profile/{{profiles.id}}">
+            <img class="rounded-circle img-thumbnail" id="status-pic" style="width: 4em;height: 4em; margin: 1em;"
+              src="{{profiles.profile_image.url}}"></a>
+          {% endfor %}
+        </div>
       </div>
     </div>
     {% if timeline_images %}
@@ -71,7 +71,7 @@
     {% endfor %}
     {% else %}
     <div class="nothing text-center">
-      <h2>Added posts will be displayed here</h2>
+      <h2>Create Posts and follow friends</h2>
     </div>
     {% endif %}
   </div>
@@ -108,7 +108,7 @@
             <a href="/profile/{{users.id}}"><img src="{{users.profile_image.url}}" alt="avatar" class="rounded-circle"
                 style="height: 3em;width: 3em;"></a>
           </div>
-          <div class="profile">  
+          <div class="profile">
             <a href="/profile/{{users.id}}" class="profile_tag"
               style="text-decoration: none; color: black; margin-left: 1em; text-transform: capitalize; margin-top: auto;margin-bottom: auto;"><b>{{users.user.username}}</b></a>
           </div>
@@ -164,7 +164,8 @@
   <!-- Footer Links -->
 
   <!-- Copyright -->
-  <div class="footer-copyright text-center py-3 ma" style="color: #808080; margin-bottom: 0% !important; ">© 2021 Copyright: Instagramex from Facebook<br>
+  <div class="footer-copyright text-center py-3 ma" style="color: #808080; margin-bottom: 0% !important; ">© 2021
+    Copyright: Instagramex from Facebook<br>
   </div>
   <!-- Copyright -->
 </footer>

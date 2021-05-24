@@ -13,6 +13,7 @@ urlpatterns = [
   re_path('comment/(?P<image_id>\d+)',views.comment,name='AddComment'),
   re_path('profile/(?P<profile_id>\d+)',views.profile,name='profile'),
   path('search/',views.search,name='Search'),
+  path('email/',views.welcome_mail,name='email'),
 ]
 
 if settings.DEBUG:

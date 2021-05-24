@@ -44,7 +44,7 @@ def welcome_mail(request):
   user=request.user
   email=user.email
   name=user.username
-  send_welcome_email(email,name)
+  send_welcome_email(name,email)
   return redirect(create_profile)
 
 def search(request):
@@ -121,7 +121,7 @@ def search(request):
 
     if is_following:
       return render(request, 'profile/profile.html', {"profile": profile, "post": post, "images": images, "unfollow_form": unfollow_form})
-    return render(request, 'profile/profile.html', {"profile": profile, "images": images, "post": post, "follow_form": follow_form, })
+    return render(request, 'profile/profile.html', {"profile": profile, "images": images, "post": post, "follow_form": follow_form, "search":searched_profile})
 
   else:
     not_searched = "No user searched"
