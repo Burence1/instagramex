@@ -1,5 +1,5 @@
 from django.test import TestCase
-from .models import Profile,Image,Comments,Follow
+from .models import Profile,Image,Comments
 from django.contrib.auth.models import User
 
 # Create your tests here.
@@ -39,23 +39,24 @@ class ImageTestClass(TestCase):
     self.assertEqual(len(images),1)
   
 
-# class ProfileTestClass(TestCase):
-#   def SetUp(self):
-#     self.burens=User(username ='burens',email='burensdev@gmail.com',password='instagood')
-#     self.profile=Profile(bio='mybio',profile_image='imageurl',user=self.burens)
-#     self.burens.save()
+class ProfileTestClass(TestCase):
+  def SetUp(self):
+    self.user=User(username ='burens',email='burensdev@gmail.com',password='instagood')
+    self.profile=Profile(bio='mybio',profile_image='imageurl',user='burens')
+    self.user.save()
+    self.profile.save()
 
-#   def tearDown(self):
-#     Profile.objects.all().delete()
-#     User.objects.all().delete()
+  def tearDown(self):
+    Profile.objects.all().delete()
+    User.objects.all().delete()
 
-#   def test_instance(self):
-#     self.assertTrue(isinstance(self.burens, User))
-#     self.assertTrue(isinstance(self.profile, Profile))
+  def test_instance(self):
+    self.assertTrue(isinstance(self.user,User))
+    self.assertTrue(isinstance(self.profile,Profile))
 
-#   def test_search_profile(self):
-#     user=Profile.search_profile(self.burens)
-#     self.assertEqual(len(user), 1)
+  def test_search_profile(self):
+    user=Profile.search_profile(self.profile)
+    self.assertEqual(len(user), 1)
 
 class CommentTestClass(TestCase):
   def setUp(self):
