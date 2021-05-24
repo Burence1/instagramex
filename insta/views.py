@@ -271,3 +271,10 @@ def upload_post(request):
   else:
     form = CreatePost()
   return render(request,'create_post.html',{"form":form})
+
+def single_post(request,image_id):
+  try:
+    image=Image.objects.get(id=image_id)
+    return render(request,'single-post.html',{"image":image})
+  except Image.DoesNotExist:
+    raise Http404()

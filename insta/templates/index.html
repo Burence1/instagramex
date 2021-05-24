@@ -30,8 +30,8 @@
           <a href="/profile/{{image.profile.id}}" class="profile_tag" style="color: black;"><b>{{image.profile}}</b></a>
           <p><strong><i>#{{image.name}}</i></strong></p>
         </div>
-      </div>
-      <img src="{{image.image.url}}" class="card-img-top" alt="upload" style="height: 40rem;object-fit: cover;">
+      </div><a href="/single/{{image.id}}">
+      <img src="{{image.image.url}}" class="card-img-top" alt="upload" style="height: 40rem;object-fit: cover;"></a>
       <div class="card-body">
         <form action="{% url 'LikePost' image_id=image.id %}">
           {% csrf_token %}
@@ -87,7 +87,7 @@
               src="{{profile.profile_image.url}}" alt="user">
           </div>
           <div class="u-name" style="position: fixed; margin-left: 4em; margin-top: auto; margin-bottom: auto;">
-            <h5><strong>{{profile.user.username}}</strong></h5>
+            <h5 style="text-transform: capitalize;"><strong>{{profile.user.username}}</strong></h5>
           </div>
         </div>
       </div>

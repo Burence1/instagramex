@@ -1,6 +1,8 @@
 <div class="navigation">
   <div class="brand">
-    <a href="/" style="color: #000; text-decoration: none;"><h1 class="brand" id="brand">INSTAGRAMEX</h1></a>
+    <a href="/" style="color: #000; text-decoration: none;">
+      <h1 class="brand" id="brand">INSTAGRAMEX</h1>
+    </a>
   </div>
   <form role="search" class="form-inline" action="{% url 'Search' %}">
     <div class="input-group">
@@ -17,8 +19,6 @@
       <i class="far fa-user-circle" style="color: black; margin-left: 2em;"></i>
     </a>
   </div>
-
-</div>
 </div>
 <!-- Modal -->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -30,10 +30,10 @@
         </button>
       </div>
       <div class="modal-body text-left">
-        <ul>
-          <li><a href="/profile/{{request.user.id}}">Profile</a></li>
-          <li><a href="/upload/image">Upload Image</a></li>
-          <li><a href="/logout">Logout</a></li>
+        <ul style="list-style: none;">
+          <li><a href="/profile/{{request.user.id}}" style="color: black;"><strong><i class="far fa-user-circle" style="color: black; margin-right: 1em;"></i>My Profile</strong></a></li>
+          <li><a href="/upload/image" style="color: black;"><strong><i class="fa fa-upload" aria-hidden="true" style="color: black; margin-right: 1em;"></i>Upload Post</strong></a></li>
+          <li><a href="/logout" style="color: black;"><strong><i class="bi bi-box-arrow-right" style="color: black; margin-right: 1em;"></i>Logout</strong></a></li>
         </ul>
       </div>
     </div>

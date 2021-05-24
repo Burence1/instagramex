@@ -14,6 +14,7 @@ urlpatterns = [
   re_path('profile/(?P<profile_id>\d+)',views.profile,name='profile'),
   path('search/',views.search,name='Search'),
   path('email/',views.welcome_mail,name='email'),
+  re_path('single/(?P<image_id>\d+)',views.single_post,name='single-post')
 ]
 
 if settings.DEBUG:
