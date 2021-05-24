@@ -161,10 +161,8 @@ def profile(request,profile_id):
         followers_stats = len(user_followers)
         prof_follower.following = followers_stats
         prof_follower.save()
-
         
       return HttpResponseRedirect(f'/profile/{profile_id}')
-
 
     elif 'unfollow' in request.POST:
       form = UnfollowForm(request.POST)
@@ -184,7 +182,6 @@ def profile(request,profile_id):
         prof_follower.save()
 
       return HttpResponseRedirect(f'/profile/{profile_id}')
-
 
   else:
     follow_form=FollowForm()

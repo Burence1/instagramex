@@ -24,6 +24,11 @@
      alt="Homepage"
      style="float: center; margin-right: 10px;" />
 
+## Login Page
+<img src="./static/images/login.png"
+     alt="Homepage"
+     style="float: center; margin-right: 10px;" />
+
 ## Setup/Installation
 * Navigate to the project repository via https://github.com/Burence1/instagramex.git
 * Change your working directory to the clone location of your preference.
