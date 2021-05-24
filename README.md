@@ -24,6 +24,11 @@
      alt="Homepage"
      style="float: center; margin-right: 10px;" />
 
+## Registration Page
+<img src="./static/images/register.png"
+     alt="Homepage"
+     style="float: center; margin-right: 10px;" />
+
 ## Login Page
 <img src="./static/images/login.png"
      alt="Homepage"
@@ -42,7 +47,7 @@
 * Users can view their posts alongside followed users' posts 
 * Users can view searched users' profiles
 * Users can search for users by userames
-* Users can view an expanded version of a single post with it's details in another page
+* Users can view an expanded version of a single post alongside the details in another page
 * Users can follow & unfollow other instagramex users
 * Users can like posts
 
