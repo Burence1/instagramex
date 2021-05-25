@@ -5,6 +5,10 @@ body{
   height: 40em;
 }
 
+.form-control{
+  background-color: transparent;
+}
+
 @media (max-width: 550px){
 
   #reg{
