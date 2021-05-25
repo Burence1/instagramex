@@ -22,7 +22,7 @@ from django.contrib.auth.views import LoginView,LogoutView
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',include('insta.urls')),
-    path('accounts/register/', RegistrationView.as_view(success_url='/email'),name='django_registration_register'),
+    path('accounts/register/', RegistrationView.as_view(success_url='/create-profile'),name='django_registration_register'),
     path('logout/', auth_views.LogoutView.as_view(next_page='/')),
     path('accounts/', include('django.contrib.auth.urls')),
     path('login/', LoginView.as_view(), {"next_page": '/'}),
