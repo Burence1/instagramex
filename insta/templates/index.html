@@ -83,8 +83,9 @@
       <div class="card-body">
         <div class="row d-flex">
           <div class="prof-img">
+            <a href="/profile/{{profile.id}}">
             <img class="rounded-circle img-thumbnail" style="position: fixed; width: 3em;height: 3em;"
-              src="{{profile.profile_image.url}}" alt="user">
+              src="{{profile.profile_image.url}}" alt="user"></a>
           </div>
           <div class="u-name" style="position: fixed; margin-left: 4em; margin-top: auto; margin-bottom: auto;">
             <h5 style="text-transform: capitalize;"><strong>{{profile.user.username}}</strong></h5>
