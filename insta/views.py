@@ -28,7 +28,6 @@ def index(request):
     followed_images=Image.profile_images(followed_profiles)
     for images in followed_images:
       index_timeline.append(images.id)
-
   timeline_images=Image.objects.filter(pk__in=index_timeline).order_by('-pub_date')
 
   all_profiles=Profile.objects.all()
